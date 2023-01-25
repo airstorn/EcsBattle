@@ -1,11 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
-using Ecs.Core.Components;
 using Ecs.Core.Pools;
 using Ecs.Enemy.Tags;
 using Ecs.Enemy.UnityComponents;
 using Ecs.GamePlay.Components;
-using Ecs.GamePlay.EnemySpawn;
 using Ecs.Navigation.Components;
 using Ecs.Spawning.Components;
 using Leopotam.Ecs;
@@ -13,7 +10,7 @@ using UnityEngine;
 
 namespace Ecs.GamePlay.Systems
 {
-    public class EnemySpawnPointSystem : IEcsInitSystem, IEcsRunSystem
+    public class EnemySpawnPointSystem : IEcsRunSystem
     {
         private readonly EcsFilter<Pool, EnemyId> _pools = null;
         
@@ -21,14 +18,6 @@ namespace Ecs.GamePlay.Systems
         
         private readonly EcsFilter<SpawnPoint, EnemySpawnPoint> _spawnPoints = null;
 
-        private Dictionary<int, int> _spawnPointsMap = null;
-
-        
-        public void Init()
-        {
-            _spawnPointsMap = _spawnPoints.GetInternalEntitiesMap();
-        }
-        
         public void Run()
         {
             foreach (var i in _trigger)
@@ -62,7 +51,7 @@ namespace Ecs.GamePlay.Systems
 
         private EcsEntity GetRandomSpawnPoint()
         {
-            return _spawnPoints.GetEntity(Random.Range(0, _spawnPointsMap.Count));
+            return _spawnPoints.GetEntity(Random.Range(0, _spawnPoints.GetEntitiesCount()));
         }
     }
 }

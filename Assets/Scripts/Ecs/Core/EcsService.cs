@@ -1,6 +1,10 @@
 using System;
 using Leopotam.Ecs;
+
+#if UNITY_EDITOR
 using Leopotam.Ecs.UnityIntegration;
+#endif
+
 using UnityEngine;
 using Zenject;
 
