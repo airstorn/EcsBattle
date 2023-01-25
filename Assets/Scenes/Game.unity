@@ -2132,6 +2132,7 @@ GameObject:
   - component: {fileID: 1411954632}
   - component: {fileID: 1411954636}
   - component: {fileID: 1411954637}
+  - component: {fileID: 1411954638}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2173,6 +2174,7 @@ MonoBehaviour:
   - {fileID: 1411954635}
   - {fileID: 1411954636}
   - {fileID: 1411954637}
+  - {fileID: 1411954638}
 --- !u!195 &1411954632
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2260,6 +2262,19 @@ MonoBehaviour:
   _fireable: {fileID: 689882402413959163, guid: 3141224242440405191483d35125d605,
     type: 3}
   _root: {fileID: 1065263943}
+--- !u!114 &1411954638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411954629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d60f45170064ee9bfd07c76d0badfbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resistance: 0.3
 --- !u!1 &1480744334
 GameObject:
   m_ObjectHideFlags: 0
