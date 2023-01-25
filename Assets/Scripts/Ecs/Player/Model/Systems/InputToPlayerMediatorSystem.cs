@@ -1,5 +1,7 @@
+using Ecs.Combat.Events;
 using Ecs.Core.Components;
 using Ecs.Input.Components;
+using Ecs.Input.Events;
 using Ecs.Input.Tags;
 using Ecs.Navigation.Components;
 using Ecs.Player.Model.Components;
@@ -16,7 +18,9 @@ namespace Ecs.Player.Model.Systems
 
         private readonly EcsFilter<InputTag, InputMouse> _mouse = null;
 
-        private readonly EcsFilter<InputListener, UnityView, VelocityMovement, LookAtDirection> _character = null;
+        private readonly EcsFilter<MousePressed> _fire = null;
+
+        private readonly EcsFilter<InputListener, UnityView, VelocityMovement, LookAtDirection>.Exclude<InputLocked> _character = null;
 
         private Camera _camera;
         
@@ -26,6 +30,26 @@ namespace Ecs.Player.Model.Systems
         }
         
         public void Run()
+        {
+            ProcessInput();
+            ProcessFire();
+        }
+
+        private void ProcessFire()
+        {
+            if (_fire.IsEmpty())
+            {
+                return;
+            }
+
+            foreach (var i in _character)
+            {
+                _character.GetEntity(i).Get<PerformFire>();
+            }
+        }
+
+
+        private void ProcessInput()
         {
             foreach (var i in _input)
             {
@@ -42,7 +66,7 @@ namespace Ecs.Player.Model.Systems
             foreach (var i in _mouse)
             {
                 ref var mouse = ref _mouse.Get2(i);
-                
+
                 foreach (var c in _character)
                 {
                     ref var view = ref _character.Get2(c);
@@ -50,7 +74,7 @@ namespace Ecs.Player.Model.Systems
 
                     var characterScreenPos = _camera.WorldToScreenPoint(view.Transform.position);
 
-                    Vector2 lookAtDirection =  mouse.ScreenPosition - (Vector2)characterScreenPos;
+                    Vector2 lookAtDirection = mouse.ScreenPosition - (Vector2)characterScreenPos;
 
                     lookAt.Direction = new Vector3(lookAtDirection.x, 0, lookAtDirection.y);
                 }

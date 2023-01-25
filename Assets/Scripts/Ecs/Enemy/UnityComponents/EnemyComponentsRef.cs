@@ -1,4 +1,6 @@
 using Ecs.Core.UnityElements;
+using Ecs.Enemy.Components;
+using Ecs.Navigation.Components;
 using Leopotam.Ecs;
 using UnityEngine;
 
@@ -13,6 +15,9 @@ namespace Ecs.Enemy.UnityComponents
         {
             ref var id = ref entity.Get<EnemyId>();
             id.ID = _id;
+
+            entity.Get<TargetMovement>();
+            entity.Get<ChasePlayer>();
         }
     }
 }

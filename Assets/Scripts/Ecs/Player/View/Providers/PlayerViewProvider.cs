@@ -10,7 +10,10 @@ namespace Ecs.Player.View.Providers
         {
             EcsSystems systems = new EcsSystems(world, "Player");
 
-            systems.Add(new CrosshairSystem());
+            systems.Add(new PlayerDeathSystem());
+            
+            systems.Add(new PlayerHealthSystem());
+            systems.Add(new KillCounterSystem());
 
             return systems;
         }

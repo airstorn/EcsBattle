@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1763eadd79a54186b805c46367ff2108, type: 3}
+  m_Name: New Enemies Asset
+  m_EditorClassIdentifier: 
+  Items:
+  - ID: 0
+    PoolCount: 50
+    Prefab: {fileID: 3406792234246363156, guid: b0777789445654857a237666e4b278ac,
+      type: 3}
+  - ID: 1
+    PoolCount: 25
+    Prefab: {fileID: 3406792234246363156, guid: abe27cc160fda4a25bc44d835e943edb,
+      type: 3}

@@ -252,6 +252,8 @@ GameObject:
   m_Component:
   - component: {fileID: 412417471}
   - component: {fileID: 412417470}
+  - component: {fileID: 412417472}
+  - component: {fileID: 412417473}
   m_Layer: 0
   m_Name: View
   m_TagString: Untagged
@@ -272,7 +274,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nameSpace: View
-  _systems: []
+  _systems:
+  - {fileID: 412417472}
+  - {fileID: 412417473}
 --- !u!4 &412417471
 Transform:
   m_ObjectHideFlags: 0
@@ -288,6 +292,30 @@ Transform:
   m_Father: {fileID: 1696725284}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &412417472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412417469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ccd1685bd048aaa03827b526b6d750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &412417473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412417469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536ee6bd8b19404e82361af859fdc991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &632832024
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +466,8 @@ GameObject:
   - component: {fileID: 1696725284}
   - component: {fileID: 1696725283}
   - component: {fileID: 1696725285}
+  - component: {fileID: 1696725286}
+  - component: {fileID: 1696725287}
   m_Layer: 0
   m_Name: ECS
   m_TagString: Untagged
@@ -458,6 +488,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _updateSystemProviders:
+  - {fileID: 1696725286}
+  - {fileID: 1696725287}
   - {fileID: 1696725285}
   - {fileID: 2085460517}
   - {fileID: 412417470}
@@ -495,6 +527,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultSceneIndex: 1
+--- !u!114 &1696725286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696725282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee2350a4eee47e8bd71ecce933e0c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1696725287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696725282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879b68c218634efd8794ae17e0daa756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2085460512
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,6 +564,8 @@ GameObject:
   - component: {fileID: 2085460516}
   - component: {fileID: 2085460515}
   - component: {fileID: 2085460514}
+  - component: {fileID: 2085460518}
+  - component: {fileID: 2085460519}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -582,5 +640,33 @@ MonoBehaviour:
   _nameSpace: Model
   _systems:
   - {fileID: 2085460515}
-  - {fileID: 2085460516}
   - {fileID: 2085460514}
+  - {fileID: 2085460519}
+  - {fileID: 2085460518}
+  - {fileID: 2085460516}
+--- !u!114 &2085460518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085460512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a186e5d4a14e968abb92e6639ea8d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemies: {fileID: 11400000, guid: 287559603f71f481a94bfa7a31b3c1f9, type: 2}
+  _maxEnemiesCount: 50
+--- !u!114 &2085460519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085460512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a4df77bcbc4a9bb1e074a50e762fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

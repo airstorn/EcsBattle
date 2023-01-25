@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using Code.AmbulanceRush.Core.Components;
 using Ecs.Core.Components;
+using Ecs.Core.Pools.Events;
 using Ecs.Core.UnityElements;
 using Leopotam.Ecs;
 using UnityEngine;
 
-namespace Modules.CT.Core.Pool
+namespace Ecs.Core.Pools
 {
     public abstract class EcsPool : ViewComponent
     {
@@ -19,10 +19,10 @@ namespace Modules.CT.Core.Pool
     public abstract class EcsPool<T, TEntity> : EcsPool where T : ViewEntity where TEntity : struct
     {
         [SerializeField]
-        private int Count;
+        protected int Count;
 
         [SerializeField]
-        private T Reference;
+        protected T Reference;
         
         protected Stack<EcsEntity> _waiting = new Stack<EcsEntity>();
         
@@ -30,8 +30,8 @@ namespace Modules.CT.Core.Pool
 
         public override void Initialize(EcsEntity ecsEntity, EcsWorld ecsWorld)
         {
-            ref var pullable = ref ecsEntity.Get<Pullable>();
-            pullable.TargetPool = this;
+            ref var pool = ref ecsEntity.Get<Pool>();
+            pool.PoolRef = this;
             _world = ecsWorld;
             for (int i = 0; i < Count; i++)
             {
@@ -46,11 +46,11 @@ namespace Modules.CT.Core.Pool
             var newEntity = _world.NewEntity();
 
             newEntity.Get<LevelEntityTag>();
-            ref var pullable = ref newEntity.Get<Pullable>();
+            ref var pullable = ref newEntity.Get<Poolable>();
             pullable.TargetPool = this;    
             
             instance.Initialize(newEntity, _world);
-            
+            OnInitialized(newEntity);
             Push(newEntity);
         }
         
@@ -78,16 +78,25 @@ namespace Modules.CT.Core.Pool
             }
         }
 
+        protected virtual void OnInitialized(EcsEntity ecsEntity)
+        {
+            
+        }
+
         protected virtual void OnGet(EcsEntity ecsEntity)
         {
             ref var view = ref ecsEntity.Get<UnityView>();
             view.GameObject.SetActive(true);
+
+            ecsEntity.Get<Spawned>();
         }
 
         protected virtual void OnPush(EcsEntity ecsEntity)
         {
             ref var view = ref ecsEntity.Get<UnityView>();
             view.GameObject.SetActive(false);
+
+            ecsEntity.Get<Despawned>();
         }
     }
 }

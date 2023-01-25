@@ -1,5 +1,6 @@
 using Ecs.Input.Components;
 using Ecs.Input.Enums;
+using Ecs.Input.Events;
 using Ecs.Input.Interfaces;
 using Ecs.Input.Tags;
 using Leopotam.Ecs;
@@ -23,6 +24,15 @@ namespace Ecs.Input.Systems
         {
            ProcessDirection();
            ProcessMouse();
+           ProcessFire();
+        }
+
+        private void ProcessFire()
+        {
+            if (UnityEngine.Input.GetMouseButtonDown(0))
+            {
+                _world.NewEntity().Get<MousePressed>();
+            }
         }
 
         private void ProcessMouse()

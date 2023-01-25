@@ -1,14 +1,16 @@
+using Ecs.Core.UnityElements;
 using Ecs.SceneManagement.Components;
 using Ecs.SceneManagement.Events;
 using Ecs.SceneManagement.Extensions;
 using Leopotam.Ecs;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Ecs.SceneManagement.Systems
 {
     public class LoadLevelSystem : IEcsInitSystem, IEcsRunSystem
     {
+        private readonly EcsFilter<LevelEntityTag> _oldEntities = null;
+        
         private readonly EcsFilter<LoadLevel, OnLoad> _signal = null;
         
         private readonly EcsFilter<LoadLevelOperation> _operations = null;
@@ -16,6 +18,8 @@ namespace Ecs.SceneManagement.Systems
         private int _defaultIndex;
 
         private readonly EcsWorld _world = null;
+
+        private bool _hasOpenedScene;
         
         public LoadLevelSystem(int defaultIndex)
         {
@@ -33,6 +37,7 @@ namespace Ecs.SceneManagement.Systems
             ProcessOperations();
         }
 
+        
         private void ProcessOperations()
         {
             foreach (var i in _operations)
@@ -45,6 +50,7 @@ namespace Ecs.SceneManagement.Systems
                     
                     _operations.GetEntity(i).Destroy();
                     _world.NewEntity().Get<OnLevelSpawned>();
+                    _hasOpenedScene = true;
                 }
             }
         }
@@ -53,11 +59,26 @@ namespace Ecs.SceneManagement.Systems
         {
             foreach (var i in _signal)
             {
+                ClearOldEntities();
+
+                if (_hasOpenedScene)
+                {
+                    SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+                }
+                
                 ref var data = ref _signal.Get1(i);
                 
                 ref  var operation = ref _world.NewEntity().Get<LoadLevelOperation>();
 
                 operation.Operation = SceneManager.LoadSceneAsync(data.Index, LoadSceneMode.Additive);
+            }
+        }
+
+        private void ClearOldEntities()
+        {
+            foreach (var oldEntity in _oldEntities)
+            {
+                _oldEntities.GetEntity(oldEntity).Destroy();
             }
         }
     }

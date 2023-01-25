@@ -1,5 +1,6 @@
 using Ecs.Core;
 using Ecs.Input.Enums;
+using Ecs.Input.Events;
 using Ecs.Input.Factories;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -18,6 +19,8 @@ namespace Ecs.Input.SystemProviders
             var currentInput = InputFactory.Create(_type);
             
             systems.Add(currentInput);
+
+            endFrame.OneFrame<MousePressed>();
 
             return systems;
         }

@@ -1,3 +1,4 @@
+using Ecs.Input.Tags;
 using Ecs.Navigation.Components;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Ecs.Navigation.Systems
     {
         private readonly EcsFilter<NavMeshMovable, VelocityMovement> _direction;
         
-        private readonly EcsFilter<NavMeshMovable, TargetMovement> _targetable;
+        private readonly EcsFilter<NavMeshMovable, TargetMovement>.Exclude<InputLocked> _targetable;
         
         public void Run()
         {
